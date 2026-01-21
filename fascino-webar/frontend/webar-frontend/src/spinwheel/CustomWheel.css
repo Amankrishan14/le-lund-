@@ -1,0 +1,291 @@
+/* RESET */
+:root {
+  font-family: 'Segoe UI', sans-serif;
+  line-height: 1.5;
+  color-scheme: dark;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  background-color: #050505;
+  color: white;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+/* MAIN WRAPPER */
+.casino-wrapper {
+  width: 100%;
+  height: 100vh;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /* Stack header and wheel vertically */
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  padding: 5px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* HEADER */
+.casino-header {
+  text-align: center;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  flex-shrink: 0;
+}
+
+.casino-header h1 {
+  font-size: clamp(1.2rem, 4vw, 2rem);
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 800;
+  text-shadow: 0 0 30px rgba(179, 135, 40, 0.2);
+  line-height: 1.2;
+}
+
+.casino-header p {
+  color: #888;
+  margin: 5px 0 0;
+  font-family: monospace;
+  font-size: 1.1rem;
+}
+
+/* CENTERED WHEEL LAYOUT */
+.wheel-center-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px;
+  padding: 0;
+  flex: 1;
+  min-height: 0;
+}
+
+/* WHEEL CANVAS CONTAINER */
+.wheel-container {
+  position: relative;
+  width: min(350px, 70vw, 70vh);
+  height: min(350px, 70vw, 70vh);
+  max-width: min(350px, 70vw, 70vh);
+  max-height: min(350px, 70vw, 70vh);
+  /* Maintain aspect ratio */
+  margin-bottom: 10px;
+  border-radius: 50%;
+  box-shadow: 0 0 60px rgba(179, 135, 40, 0.25);
+  flex-shrink: 0;
+  /* Glow effect */
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* SPIN BUTTON */
+.spin-btn {
+  background: linear-gradient(to bottom, #fcf6ba, #bf953f);
+  border: none;
+  padding: 10px 30px;
+  font-size: clamp(1rem, 3.5vw, 1.3rem);
+  font-weight: bold;
+  color: #3e1e00;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  width: 80%;
+  max-width: 280px;
+  min-height: 48px;
+  flex-shrink: 0;
+  /* Touch friendly */
+  transition: transform 0.1s, filter 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.spin-btn:hover:not(:disabled) {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(191, 149, 63, 0.4);
+}
+
+.spin-btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.spin-btn:disabled {
+  background: #444;
+  color: #888;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* WINNER TEXT */
+.winner-msg {
+  margin-top: 10px;
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  color: #FFD700;
+  text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+  text-align: center;
+  animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  flex-shrink: 0;
+  padding: 0 10px;
+}
+
+.winner-msg span {
+  font-weight: bold;
+}
+
+/* LOADING & ERROR STATES */
+.loading-container,
+.error-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  color: #b38728;
+  font-size: 1.2rem;
+}
+
+.error-container button {
+  margin-left: 15px;
+  padding: 8px 16px;
+  background: #b38728;
+  border: none;
+  color: black;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+/* ANIMATIONS */
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+  .casino-wrapper {
+    padding: 3px;
+  }
+
+  .casino-header {
+    margin-bottom: 5px;
+    margin-top: 0;
+  }
+
+  .casino-header h1 {
+    font-size: clamp(1rem, 3.5vw, 1.5rem);
+  }
+
+  .wheel-container {
+    width: min(280px, 65vw, 65vh);
+    height: min(280px, 65vw, 65vh);
+    max-width: min(280px, 65vw, 65vh);
+    max-height: min(280px, 65vw, 65vh);
+    margin-bottom: 8px;
+  }
+
+  .spin-btn {
+    padding: 8px 25px;
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+    min-height: 45px;
+    width: 75%;
+    margin-bottom: 8px;
+  }
+
+  .winner-msg {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    margin-top: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .wheel-container {
+    width: min(250px, 60vw, 60vh);
+    height: min(250px, 60vw, 60vh);
+    max-width: min(250px, 60vw, 60vh);
+    max-height: min(250px, 60vw, 60vh);
+  }
+
+  .casino-header h1 {
+    font-size: clamp(0.9rem, 3vw, 1.2rem);
+  }
+}
+
+@media (max-height: 700px) {
+  .casino-header {
+    margin-bottom: 3px;
+    margin-top: 0;
+  }
+
+  .casino-header h1 {
+    font-size: clamp(0.9rem, 3vw, 1.2rem);
+  }
+
+  .wheel-container {
+    width: min(250px, 60vw, 60vh);
+    height: min(250px, 60vw, 60vh);
+    max-width: min(250px, 60vw, 60vh);
+    max-height: min(250px, 60vw, 60vh);
+    margin-bottom: 5px;
+  }
+
+  .spin-btn {
+    min-height: 40px;
+    padding: 6px 20px;
+    font-size: clamp(0.85rem, 2.8vw, 1rem);
+    margin-bottom: 5px;
+  }
+
+  .winner-msg {
+    margin-top: 3px;
+    font-size: clamp(0.9rem, 2.2vw, 1.1rem);
+  }
+}
+
+@media (max-height: 600px) {
+  .wheel-container {
+    width: min(220px, 55vw, 55vh);
+    height: min(220px, 55vw, 55vh);
+    max-width: min(220px, 55vw, 55vh);
+    max-height: min(220px, 55vw, 55vh);
+  }
+  
+  .casino-header h1 {
+    font-size: clamp(0.8rem, 2.5vw, 1rem);
+  }
+}
+
+
+

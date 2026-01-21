@@ -1,0 +1,9 @@
+# Ignore old build artifacts
+index-old.html
+simple-webar.html
+test-simple.html
+app.js
+server.js
+https-server-mobile.js
+*.backup
+

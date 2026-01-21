@@ -1,0 +1,163 @@
+/* Video Navigation Controls */
+.video-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 3vw, 20px);
+  width: 100%;
+  max-width: 100%;
+  padding: clamp(12px, 2.5vw, 16px) clamp(8px, 2vw, 12px);
+  box-sizing: border-box;
+  pointer-events: auto;
+  position: relative;
+  z-index: 15;
+}
+
+/* Navigation Arrows */
+.video-nav-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(32px, 8vw, 40px);
+  height: clamp(32px, 8vw, 40px);
+  min-width: 32px;
+  min-height: 32px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: rgba(255, 255, 255, 0.75);
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  flex-shrink: 0;
+}
+
+.video-nav-arrow:hover:not(.disabled) {
+  color: rgba(255, 255, 255, 0.95);
+  transform: scale(1.1);
+}
+
+.video-nav-arrow:active:not(.disabled) {
+  transform: scale(0.95);
+  color: rgba(255, 255, 255, 1);
+}
+
+.video-nav-arrow.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.video-nav-arrow svg {
+  width: 100%;
+  height: 100%;
+  max-width: 20px;
+  max-height: 20px;
+}
+
+/* Pagination Dots */
+.video-nav-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(6px, 1.5vw, 8px);
+  flex: 0 0 auto;
+}
+
+.video-nav-dot {
+  width: clamp(6px, 1.5vw, 8px);
+  height: clamp(6px, 1.5vw, 8px);
+  min-width: 6px;
+  min-height: 6px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.45);
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  flex-shrink: 0;
+}
+
+.video-nav-dot:hover {
+  transform: scale(1.2);
+  border-color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.video-nav-dot:active {
+  transform: scale(0.9);
+}
+
+/* Active Dot */
+.video-nav-dot.active {
+  background: rgba(255, 255, 255, 1);
+  border-color: rgba(255, 255, 255, 1);
+  width: clamp(8px, 2vw, 10px);
+  height: clamp(8px, 2vw, 10px);
+  min-width: 8px;
+  min-height: 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .video-navigation {
+    gap: 10px;
+    padding: 10px 6px;
+  }
+  
+  .video-nav-arrow {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .video-nav-dots {
+    gap: 6px;
+  }
+  
+  .video-nav-dot {
+    width: 6px;
+    height: 6px;
+  }
+  
+  .video-nav-dot.active {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+@media (min-width: 769px) {
+  .video-navigation {
+    gap: 20px;
+    padding: 16px 12px;
+  }
+  
+  .video-nav-arrow {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .video-nav-dots {
+    gap: 8px;
+  }
+  
+  .video-nav-dot {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .video-nav-dot.active {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+/* Landscape orientation */
+@media (orientation: landscape) and (max-height: 600px) {
+  .video-navigation {
+    gap: 10px;
+    padding: 8px 6px;
+  }
+}

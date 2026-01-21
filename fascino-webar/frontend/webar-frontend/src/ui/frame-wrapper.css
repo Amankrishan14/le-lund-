@@ -1,0 +1,480 @@
+/* Frame Wrapper - contains Spin to Win, video, navigation, and learn button */
+/* All elements centered together as one unit, responsive, nothing goes outside screen */
+/* Cross-browser compatible with safe area support */
+.frame-wrapper {
+  width: min(92%, 420px);
+  /* Support safe areas for notched devices - use fallback with @supports */
+  max-width: calc(100vw - clamp(30px, 6vw, 60px));
+  margin: 0 auto; /* Centered horizontally */
+  padding: clamp(40px, 6vw, 60px) clamp(10px, 2vw, 20px) clamp(20px, 5vw, 40px) clamp(10px, 2vw, 20px);
+  padding-bottom: clamp(20px, 5vw, 40px);
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center all children horizontally */
+  justify-content: center; /* Center all children vertically */
+  position: relative;
+  box-sizing: border-box;
+  gap: clamp(16px, 4vw, 24px); /* Consistent spacing between Spin to Win and video content */
+  overflow: hidden; /* Prevent any child from going outside */
+  /* Cross-browser fixes */
+  -webkit-transform: translateZ(0); /* Force hardware acceleration */
+  transform: translateZ(0);
+  will-change: auto;
+  /* Support for dynamic viewport units */
+  max-height: 100vh;
+  max-height: 100dvh;
+}
+
+/* Support safe areas for devices with notches */
+@supports (padding: env(safe-area-inset-top)) {
+  .frame-wrapper {
+    max-width: calc(100vw - clamp(30px, 6vw, 60px) - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px));
+    padding-bottom: calc(clamp(20px, 5vw, 40px) + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* Video Content Container - Groups Video, Navigation, and Learn More as ONE unit */
+/* Centered, responsive, no scaling, contained within screen */
+.video-content-container {
+  width: 100%;
+  max-width: 100%; /* Never exceed parent width */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  gap: clamp(4px, 1vw, 6px); /* Tight spacing between video, navigation, and button */
+  overflow: hidden; /* Prevent content from going outside */
+}
+
+.canvas-holder {
+  width: 100%;
+  max-width: 100%; /* Never exceed container */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  overflow: hidden; /* Prevent video from going outside */
+  padding: 0 !important; /* Remove any padding */
+  margin: 0 !important; /* Remove any margin */
+  border: none !important; /* Remove any border */
+  outline: none !important; /* Remove any outline */
+  /* Responsive container */
+  min-width: 0; /* Allow shrinking on small screens */
+  /* Support for safe areas */
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}
+
+.swipe-box {
+  position: absolute;
+  top: 10px;
+  width: clamp(180px, 70%, 320px);
+  padding: 12px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 22px;
+  background: rgba(255,255,255,0.22);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: 20;
+  color: white;
+  font-size: clamp(12px, 3vw, 16px);
+  font-weight: 600;
+  pointer-events: auto;
+}
+
+.learn-btn {
+  position: absolute;
+  bottom: 10px;
+  width: clamp(140px, 60%, 260px);
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 22px;
+  background: rgba(255,255,255,0.22);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: 20;
+  color: white;
+  font-size: clamp(14px, 3vw, 18px);
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+/* Map existing SwipeInstruction component to swipe-box styling - OVERRIDE ALL OLD STYLES */
+.frame-wrapper .swipe-instruction {
+  position: absolute !important;
+  top: 10px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: clamp(280px, 85%, 400px) !important;
+  z-index: 20 !important;
+  margin: 0 !important;
+  opacity: 1 !important;
+  max-width: 95% !important;
+  pointer-events: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  /* Override old fixed positioning */
+  background: transparent !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+}
+
+.frame-wrapper .swipe-instruction-content {
+  background: rgba(60, 60, 60, 0.9) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border-radius: 26px !important;
+  padding: 14px 20px !important;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.4) !important;
+  border: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  min-width: auto !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  /* Override old transparent background */
+  background: rgba(60, 60, 60, 0.9) !important;
+}
+
+.frame-wrapper .swipe-instruction-text {
+  font-size: clamp(13px, 2.5vw, 15px) !important;
+  font-weight: 500 !important;
+  color: white !important;
+  text-align: left !important;
+  white-space: nowrap !important;
+  flex: 1 !important;
+  letter-spacing: 0.2px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.frame-wrapper .swipe-instruction-close {
+  background: rgba(80, 80, 80, 0.7) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 50% !important;
+  width: 24px !important;
+  height: 24px !important;
+  min-width: 24px !important;
+  min-height: 24px !important;
+  max-width: 24px !important;
+  max-height: 24px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  color: white !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  margin-left: 10px !important;
+  flex-shrink: 0 !important;
+  transition: all 0.2s ease !important;
+  -webkit-tap-highlight-color: transparent !important;
+  touch-action: manipulation !important;
+}
+
+.frame-wrapper .swipe-instruction-close:hover {
+  background: rgba(100, 100, 100, 0.8) !important;
+  transform: scale(1.08) !important;
+}
+
+.frame-wrapper .swipe-instruction-close:active {
+  transform: scale(0.92) !important;
+  background: rgba(70, 70, 70, 0.8) !important;
+}
+
+.frame-wrapper .swipe-instruction-close svg {
+  width: 12px !important;
+  height: 12px !important;
+  stroke: currentColor !important;
+  stroke-width: 2.5 !important;
+  pointer-events: none !important;
+}
+
+/* Video Navigation styling within video-content-container */
+/* Centered, responsive, contained */
+.video-content-container .video-navigation {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: clamp(8px, 2vw, 12px) auto 0 auto !important; /* Centered with auto margins */
+  position: relative !important;
+  flex-shrink: 0 !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+/* Map existing FloatingCTA component to learn-btn styling */
+/* Production-grade responsive, same as Spin to Win button, never goes off-screen */
+.video-content-container .floating-cta,
+.video-content-container .learn-more-btn,
+.frame-wrapper .floating-cta,
+.frame-wrapper .learn-more-btn {
+  position: relative !important;
+  bottom: auto !important;
+  left: auto !important;
+  right: auto !important;
+  transform: none !important;
+  width: clamp(200px, min(75vw, 85%), 340px) !important; /* Same as Spin to Win button */
+  max-width: min(85%, calc(100vw - 40px)) !important; /* Always 20px padding on each side */
+  min-width: 200px !important; /* Minimum touch target */
+  padding: clamp(12px, 3vw, 16px) clamp(16px, 4vw, 24px) !important; /* Same as Spin to Win button content */
+  min-height: 44px !important; /* Minimum touch target for mobile */
+  border-radius: 999px !important; /* Pill shape - fully rounded */
+  background: rgba(255,255,255,0.28) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  z-index: 20 !important;
+  margin: 0 auto !important; /* Centered */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25) !important;
+  font-size: clamp(14px, 2.8vw, 16px) !important; /* Same as Spin to Win button text */
+  font-weight: 600 !important;
+  white-space: nowrap !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 1 !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
+  border: none !important;
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  color: white !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0.3px !important;
+}
+
+/* Hover and active states for Learn More button */
+.video-content-container .floating-cta:hover,
+.video-content-container .learn-more-btn:hover,
+.frame-wrapper .floating-cta:hover,
+.frame-wrapper .learn-more-btn:hover {
+  background: rgba(255,255,255,0.35) !important;
+  transform: scale(1.02) !important;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.3) !important;
+}
+
+.video-content-container .floating-cta:active,
+.video-content-container .learn-more-btn:active,
+.frame-wrapper .floating-cta:active,
+.frame-wrapper .learn-more-btn:active {
+  transform: scale(0.98) !important;
+  background: rgba(255,255,255,0.22) !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2) !important;
+}
+
+
+
+
+/* Small screens - Standard portrait phones (320px - 480px) */
+@media (max-width: 480px) {
+  .frame-wrapper {
+    width: min(95%, 400px) !important;
+    max-width: calc(100vw - 20px) !important; /* 10px padding on each side */
+    padding: clamp(50px, 7vw, 70px) clamp(10px, 2vw, 16px) clamp(16px, 4vw, 30px) clamp(10px, 2vw, 16px) !important;
+    padding-bottom: clamp(16px, 4vw, 30px) !important;
+    gap: clamp(14px, 3.5vw, 20px) !important;
+    overflow: hidden !important;
+  }
+
+  @supports (padding: env(safe-area-inset-top)) {
+    .frame-wrapper {
+      max-width: calc(100vw - 20px - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px)) !important;
+      padding-bottom: calc(clamp(16px, 4vw, 30px) + env(safe-area-inset-bottom, 0px)) !important;
+    }
+  }
+
+  .frame-wrapper .spin-to-win-btn {
+    width: clamp(200px, min(75vw, 85%), 320px) !important;
+    max-width: min(85%, calc(100vw - 40px)) !important; /* 20px padding each side */
+    margin: clamp(16px, 4vw, 30px) auto 0 auto !important;
+  }
+
+  .video-content-container {
+    gap: clamp(4px, 1vw, 6px) !important;
+  }
+
+  .video-content-container .floating-cta,
+  .video-content-container .learn-more-btn {
+    width: clamp(200px, min(75vw, 85%), 320px) !important;
+    max-width: min(85%, calc(100vw - 40px)) !important;
+    padding: clamp(12px, 3vw, 14px) clamp(16px, 4vw, 20px) !important;
+  }
+  
+  .video-content-container .video-navigation {
+    margin: clamp(8px, 2vw, 12px) auto 0 auto !important;
+  }
+}
+
+/* Medium screens - Large phones (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .frame-wrapper {
+    max-width: calc(100vw - 40px) !important; /* 20px padding each side */
+    width: min(90%, 420px) !important;
+  }
+
+  .frame-wrapper .spin-to-win-btn {
+    width: clamp(220px, min(75vw, 85%), 340px) !important;
+    max-width: min(85%, calc(100vw - 40px)) !important;
+    margin: clamp(18px, 4.5vw, 32px) auto 0 auto !important;
+  }
+
+  .video-content-container {
+    max-width: 100% !important;
+  }
+
+  .video-content-container .floating-cta,
+  .video-content-container .learn-more-btn {
+    width: clamp(220px, min(75vw, 85%), 340px) !important;
+    max-width: min(85%, calc(100vw - 40px)) !important;
+    padding: clamp(13px, 3vw, 15px) clamp(18px, 4vw, 22px) !important;
+  }
+}
+
+
+/* Tablet portrait (769px - 1024px) */
+
+/* Landscape orientation - All sizes */
+@media (orientation: landscape) {
+  .frame-wrapper {
+    width: min(85%, 500px) !important;
+    max-width: calc(100vw - 40px) !important; /* 20px padding each side */
+    padding: clamp(40px, 6vw, 60px) clamp(12px, 3vw, 24px) clamp(14px, 3.5vw, 28px) clamp(12px, 3vw, 24px) !important;
+    gap: clamp(12px, 3vw, 18px) !important;
+  }
+
+  .frame-wrapper .spin-to-win-btn {
+    width: clamp(180px, min(70vw, 80%), 300px) !important;
+    max-width: min(80%, calc(100vw - 40px)) !important;
+  }
+
+  .video-content-container {
+    gap: clamp(3px, 0.8vw, 5px) !important;
+  }
+
+  .video-content-container .floating-cta,
+  .video-content-container .learn-more-btn {
+    width: clamp(180px, min(70vw, 80%), 300px) !important;
+    max-width: min(80%, calc(100vw - 40px)) !important;
+    padding: clamp(10px, 2.5vw, 14px) clamp(14px, 3.5vw, 20px) !important;
+  }
+  
+  .video-content-container .video-navigation {
+    margin: clamp(6px, 1.5vw, 10px) auto 0 auto !important;
+  }
+}
+
+/* Tablet portrait */
+@media (min-width: 769px) and (max-width: 1024px) and (orientation: portrait) {
+  .frame-wrapper {
+    width: min(85%, 450px) !important;
+    max-width: calc(100vw - 50px) !important; /* 25px padding each side for tablets */
+    padding: clamp(50px, 7vw, 70px) clamp(12px, 2.5vw, 20px) clamp(18px, 4vw, 32px) clamp(12px, 2.5vw, 20px) !important;
+    gap: clamp(16px, 3.5vw, 22px) !important;
+    overflow: hidden !important;
+  }
+
+  .frame-wrapper .spin-to-win-btn {
+    width: clamp(220px, min(75vw, 85%), 340px) !important;
+    max-width: min(85%, calc(100vw - 50px)) !important;
+    margin: clamp(18px, 4.5vw, 32px) auto 0 auto !important;
+  }
+
+  .video-content-container {
+    gap: clamp(4px, 1vw, 6px) !important;
+  }
+
+  .video-content-container .floating-cta,
+  .video-content-container .learn-more-btn {
+    width: clamp(220px, min(75vw, 85%), 340px) !important;
+    max-width: min(85%, calc(100vw - 50px)) !important;
+    padding: clamp(13px, 3vw, 15px) clamp(18px, 4vw, 22px) !important;
+  }
+  
+  .video-content-container .video-navigation {
+    margin: clamp(10px, 2.5vw, 14px) auto 0 auto !important;
+  }
+}
+
+/* Tablet landscape and desktop */
+@media (min-width: 769px) and (orientation: landscape) {
+  .frame-wrapper {
+    width: min(80%, 500px) !important;
+    max-width: calc(100vw - 40px) !important;
+    padding: clamp(40px, 6vw, 60px) clamp(16px, 3vw, 24px) clamp(14px, 3.5vw, 28px) clamp(16px, 3vw, 24px) !important;
+    gap: clamp(12px, 3vw, 18px) !important;
+  }
+
+  .frame-wrapper .spin-to-win-btn {
+    width: clamp(180px, min(70vw, 80%), 300px) !important;
+    max-width: min(80%, calc(100vw - 40px)) !important;
+  }
+
+  .video-content-container {
+    gap: clamp(3px, 0.8vw, 5px) !important;
+  }
+
+  .video-content-container .floating-cta,
+  .video-content-container .learn-more-btn {
+    width: clamp(180px, min(70vw, 80%), 300px) !important;
+    max-width: min(80%, calc(100vw - 40px)) !important;
+    padding: clamp(10px, 2.5vw, 14px) clamp(14px, 3.5vw, 20px) !important;
+  }
+  
+  .video-content-container .video-navigation {
+    margin: clamp(6px, 1.5vw, 10px) auto 0 auto !important;
+  }
+}
+
+/* Desktop and larger screens */
+@media (min-width: 1025px) {
+  .frame-wrapper {
+    width: min(75%, 500px) !important;
+    max-width: calc(100vw - 60px) !important; /* 30px padding each side */
+    padding: clamp(60px, 8vw, 80px) clamp(18px, 4vw, 30px) clamp(20px, 5vw, 40px) clamp(18px, 4vw, 30px) !important;
+    gap: clamp(18px, 4.5vw, 26px) !important;
+  }
+
+  .frame-wrapper .spin-to-win-btn {
+    width: clamp(240px, min(70vw, 80%), 360px) !important;
+    max-width: min(80%, calc(100vw - 60px)) !important;
+  }
+
+  .video-content-container {
+    gap: clamp(5px, 1.2vw, 7px) !important;
+  }
+
+  .video-content-container .floating-cta,
+  .video-content-container .learn-more-btn {
+    width: clamp(240px, min(70vw, 80%), 360px) !important;
+    max-width: min(80%, calc(100vw - 60px)) !important;
+    padding: clamp(14px, 3.5vw, 16px) clamp(18px, 4.5vw, 24px) !important;
+  }
+  
+  .video-content-container .video-navigation {
+    margin: clamp(10px, 2.5vw, 14px) auto 0 auto !important;
+  }
+}
+

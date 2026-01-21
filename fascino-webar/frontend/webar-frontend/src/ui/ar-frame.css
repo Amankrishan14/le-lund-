@@ -1,0 +1,135 @@
+/* Floating centered panel - does NOT fill entire screen */
+/* Centered, responsive, contained within screen - adapts to all screen sizes */
+.ar-frame {
+  width: 100%;
+  max-width: min(420px, calc(100vw - clamp(20px, 5vw, 60px))); /* Responsive padding based on screen */
+  margin: 0 auto; /* Centered, no extra vertical margin */
+  border-radius: clamp(16px, 4vw, 26px); /* Responsive border radius */
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 10;
+  box-sizing: border-box;
+  padding: 0 !important; /* Remove any default padding */
+  border: none !important; /* Remove any default border */
+  outline: none !important; /* Remove any outline */
+  /* Responsive aspect ratio handling */
+  aspect-ratio: auto; /* Let content determine aspect ratio */
+  /* AR camera visible behind - no fullscreen overlay */
+  /* No fullscreen - floating panel */
+  /* Smooth scaling */
+  transition: max-width 0.3s ease, border-radius 0.3s ease;
+}
+
+/* Top banner image - PNG defines rounded top - responsive */
+.banner {
+  width: 100%;
+  display: block;
+  height: auto;
+  border-radius: clamp(16px, 4vw, 26px) clamp(16px, 4vw, 26px) 0 0; /* Responsive top corners */
+  margin: 0;
+  padding: 0;
+  object-fit: cover;
+  /* No extra glossy borders */
+  transition: border-radius 0.3s ease;
+}
+
+/* Bottom video - sits directly under banner inside same container - fully responsive */
+.video {
+  width: 100%;
+  height: auto !important;
+  display: block;
+  object-fit: cover;
+  border-radius: 0 0 clamp(16px, 4vw, 26px) clamp(16px, 4vw, 26px); /* Responsive bottom corners */
+  margin: 0;
+  padding: 0;
+  /* Video adapts to panel, never fullscreen */
+  /* Smooth transitions to prevent blank frames */
+  transition: opacity 0.3s ease-in-out, border-radius 0.3s ease;
+  opacity: 1;
+  will-change: opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  /* Maintain aspect ratio */
+  aspect-ratio: auto;
+  /* Responsive max height for very small screens */
+  max-height: 60vh;
+}
+
+/* Responsive adjustments for different screen sizes */
+/* Small phones (320px - 480px) */
+@media (max-width: 480px) {
+  .ar-frame {
+    max-width: calc(100vw - clamp(20px, 6vw, 40px)) !important; /* More padding on small screens */
+    border-radius: clamp(12px, 3vw, 20px) !important;
+    margin: 0 auto !important;
+    width: 100% !important;
+    padding: 0 !important;
+  }
+  
+  .banner {
+    border-radius: clamp(12px, 3vw, 20px) clamp(12px, 3vw, 20px) 0 0 !important;
+  }
+  
+  .video {
+    border-radius: 0 0 clamp(12px, 3vw, 20px) clamp(12px, 3vw, 20px) !important;
+    max-height: 55vh !important;
+  }
+}
+
+/* Medium phones (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .ar-frame {
+    max-width: calc(100vw - clamp(30px, 7vw, 50px)) !important;
+    border-radius: clamp(18px, 4vw, 24px) !important;
+  }
+}
+
+/* Tablets (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .ar-frame {
+    max-width: min(450px, calc(100vw - clamp(40px, 8vw, 80px))) !important;
+    border-radius: clamp(20px, 4vw, 26px) !important;
+  }
+}
+
+/* Large screens (1025px and above) */
+@media (min-width: 1025px) {
+  .ar-frame {
+    max-width: min(480px, calc(100vw - clamp(50px, 10vw, 100px))) !important;
+    border-radius: 26px !important;
+  }
+}
+
+/* Landscape orientation */
+@media (orientation: landscape) {
+  .ar-frame {
+    max-width: min(500px, calc(100vw - clamp(40px, 8vw, 80px))) !important;
+    max-height: 90vh !important;
+  }
+  
+  .video {
+    max-height: 60vh !important;
+    object-fit: contain !important;
+  }
+}
+
+/* Extra small screens (iPhone SE, etc. - 375px and below) */
+@media (max-width: 375px) {
+  .ar-frame {
+    max-width: calc(100vw - 20px) !important; /* Fixed 10px padding each side */
+    border-radius: 16px !important;
+  }
+  
+  .banner {
+    border-radius: 16px 16px 0 0 !important;
+  }
+  
+  .video {
+    border-radius: 0 0 16px 16px !important;
+    max-height: 50vh !important; /* More constrained on very small screens */
+  }
+}

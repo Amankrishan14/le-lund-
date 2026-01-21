@@ -1,0 +1,116 @@
+/* Spin-to-Win button - Production-grade responsive, centered, never goes off-screen */
+.frame-wrapper .spin-to-win-btn {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  transform: none !important;
+  width: clamp(200px, min(75vw, 85%), 340px) !important;
+  max-width: min(85%, calc(100vw - 40px)) !important; /* Always 20px padding on each side */
+  min-width: 200px !important; /* Minimum touch target */
+  z-index: 20 !important;
+  margin: clamp(16px, 4vw, 32px) auto 0 auto !important;
+  opacity: 0 !important;
+  pointer-events: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  transition: opacity 0.35s ease !important;
+  cursor: pointer !important;
+  flex-shrink: 1 !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
+}
+
+/* Inner content - glossy background style, production-grade responsive */
+.frame-wrapper .spin-to-win-btn-content {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.35),
+    rgba(255, 255, 255, 0.10)
+  ) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-radius: clamp(20px, 5vw, 26px) !important;
+  padding: clamp(12px, 3vw, 16px) clamp(16px, 4vw, 24px) !important;
+  min-height: 44px !important; /* Minimum touch target for mobile */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.4) !important;
+  border: none !important;
+  outline: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: clamp(6px, 1.5vw, 10px) !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  transition: all 0.2s ease !important;
+  margin: 0 !important;
+}
+
+.frame-wrapper .spin-to-win-btn.show {
+  opacity: 1 !important;
+}
+
+.frame-wrapper .spin-to-win-btn-text {
+  font-size: clamp(14px, 2.8vw, 16px) !important;
+  font-weight: 600 !important;
+  color: #F4D37C !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  letter-spacing: 0.3px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+  line-height: 1.2 !important;
+}
+
+.frame-wrapper .spin-to-win-btn svg {
+  flex-shrink: 0;
+  width: clamp(20px, 5vw, 26px) !important;
+  height: clamp(20px, 5vw, 26px) !important;
+  display: block;
+}
+
+.frame-wrapper .spin-to-win-btn:hover .spin-to-win-btn-content {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.45),
+    rgba(255, 255, 255, 0.15)
+  ) !important;
+  transform: scale(1.02);
+}
+
+.frame-wrapper .spin-to-win-btn:active .spin-to-win-btn-content {
+  transform: scale(0.98);
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.30),
+    rgba(255, 255, 255, 0.08)
+  ) !important;
+}
+
+.spin-to-win-btn.show {
+  opacity: 1;
+}
+
+.spin-to-win-btn:hover {
+  transform: scale(1.03);
+}
+
+.spin-to-win-btn:active {
+  transform: scale(0.97);
+}
+
+.wheel-icon {
+  font-size: 1.6rem;
+  filter: drop-shadow(0 0 6px rgba(255, 204, 102, 0.5));
+}
+
